@@ -1,0 +1,11 @@
+name: shiny
+title:
+username:
+account: tu-far-verbr
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 4240593
+bundleId: 4689952
+url: https://brandata.shinyapps.io/shiny/
+when: 1623108545.00398
+lastSyncTime: 1623108545.004

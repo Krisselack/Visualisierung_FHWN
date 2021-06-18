@@ -1,0 +1,91 @@
+Katastral­gemeinde,KG-Nr.,Abk.Karte,Bezirk,Bezirks­gericht,Fläche in ha(im Bezirk),auch Bezirk(e)(mit Fläche in ha)
+Innere Stadt,01004,–,"01., Innere Stadt",Innere Stadt Wien,"285,71",–
+Leopoldstadt,01657,–,"02., Leopoldstadt",Leopoldstadt,"1.791,92",–
+Landstraße,01006,–,"03., Landstraße",Innere Stadt Wien,"717,25","11. (1,00)"
+Wieden,01011,–,"04., Wieden",Innere Stadt Wien,"180,22",–
+Margarethen,01008,–,"05., Margareten",Innere Stadt Wien,"200,68","6. (1,00)"
+Mariahilf,01009,–,"06., Mariahilf",Innere Stadt Wien,"143,81",–
+Neubau,01010,–,"07., Neubau",Josefstadt,"160,54","1. (1,00)"
+Josefstadt,01005,–,"08., Josefstadt",Josefstadt,"108,94",–
+Alsergrund,01002,–,"09., Alsergrund",Josefstadt,"295,88","1. (1,00)"
+Favoriten,01101,F,"10., Favoriten",Favoriten,"524,14","3. (2,00)"
+Inzersdorf-Stadt,01102,I,"10., Favoriten",Favoriten,"786,03","12. (13,58), 23. (5,00)"
+Oberlaa Land,01104,OL,"10., Favoriten",Favoriten,"450,37",–
+Oberlaa Stadt,01105,OS,"10., Favoriten",Favoriten,"748,28",–
+Rothneusiedl,01106,R,"10., Favoriten",Favoriten,"189,91",–
+Unterlaa,01108,U,"10., Favoriten",Favoriten,"338,11",–
+Albern,01109,A,"11., Simmering",Innere Stadt Wien,"258,61",–
+Kaiserebersdorf,01103,K,"11., Simmering",Innere Stadt Wien,"1.026,11","10. (23,00)"
+Simmering,01107,S,"11., Simmering",Innere Stadt Wien,"1.039,12","3. (22,50), 10. (116,94)"
+Altmannsdorf,01301,A,"12., Meidling",Meidling,"230,65",–
+Gaudenzdorf,01303,G,"12., Meidling",Meidling,"27,54",–
+Hetzendorf,01304,H,"12., Meidling",Meidling,"230,93",–
+Meidling,01305,M,"12., Meidling",Meidling,"318,61",–
+Auhof,01201,A,"13., Hietzing",Hietzing,"2.532,61","14. (22,00)"
+Hacking,01203,Ha,"13., Hietzing",Hietzing,"43,04","14. (8,00)"
+Hietzing,01205,Hi,"13., Hietzing",Hietzing,"122,99",–
+Lainz,01207,L,"13., Hietzing",Hietzing,"171,56",–
+Ober St. Veit,01209,O,"13., Hietzing",Hietzing,"394,06",–
+Rosenberg,01211,R,"13., Hietzing",Hietzing,"40,63",–
+Schönbrunn,01212,Sb,"13., Hietzing",Hietzing,"200,55",–
+Speising,01213,Sp,"13., Hietzing",Hietzing,"180,36",–
+Unter St. Veit,01215,U,"13., Hietzing",Hietzing,"60,88",–
+Breitensee,01202,B,"14., Penzing",Fünfhaus,"172,82","16. (1,00)"
+Hadersdorf,01204,Ha,"14., Penzing",Fünfhaus,"2.106,37",–
+Hütteldorf,01206,Hü,"14., Penzing",Fünfhaus,"615,47","13. (20,00)"
+Oberbaumgarten,01208,O,"14., Penzing",Fünfhaus,"89,85",–
+Penzing,01210,P,"14., Penzing",Fünfhaus,"192,71",–
+Unterbaumgarten,01214,U,"14., Penzing",Fünfhaus,"99,21","13. (3,00)"
+Weidlingau,01216,W,"14., Penzing",Fünfhaus,"93,47",–
+Fünfhaus,01302,F,"15., Rudolfsheim-Fünfhaus",Fünfhaus,"164,83",–
+Rudolfsheim,01306,R,"15., Rudolfsheim-Fünfhaus",Fünfhaus,"167,44",–
+Sechshaus,01307,S,"15., Rudolfsheim-Fünfhaus",Fünfhaus,"36,24",–
+Neulerchenfeld,01403,N,"16., Ottakring",Hernals,"60,15",–
+Ottakring,01405,O,"16., Ottakring",Hernals,"805,93",–
+Dornbach,01401,D,"17., Hernals",Hernals,"558,13",–
+Hernals,01402,H,"17., Hernals",Hernals,"195,34",–
+Neuwaldegg,01404,N,"17., Hernals",Hernals,"385,91",–
+Gersthof,01501,G,"18., Währing",Döbling,"87,85",–
+Pötzleinsdorf,01510,P,"18., Währing",Döbling,"222,12","19. (34,00)"
+Währing,01514,Wä,"18., Währing",Döbling,"242,64","19. (11,00)"
+Weinhaus,01515,W,"18., Währing",Döbling,"17,34",–
+Grinzing,01502,G,"19., Döbling",Döbling,"613,52",–
+Heiligenstadt,01503,H,"19., Döbling",Döbling,"219,46",–
+Josefsdorf,01504,J,"19., Döbling",Döbling,"64,99",–
+Kahlenbergerdorf,01505,K,"19., Döbling",Döbling,"226,01",–
+Neustift am Walde,01506,N,"19., Döbling",Döbling,"151,85","18. (58,00)"
+Nußdorf,01507,Nu,"19., Döbling",Döbling,"226,84",–
+Oberdöbling,01508,Od,"19., Döbling",Döbling,"241,20",–
+Obersievering,01509,Os,"19., Döbling",Döbling,"234,79",–
+Salmannsdorf,01511,S,"19., Döbling",Döbling,"66,05",–
+Unterdöbling,01512,Ud,"19., Döbling",Döbling,"72,38",–
+Untersievering,01513,Us,"19., Döbling",Döbling,"198,25",–
+Brigittenau,01620,–,"20., Brigittenau",Leopoldstadt,"494,84",–
+Donaufeld,01603,D,"21., Floridsdorf",Floridsdorf,"434,49",–
+Floridsdorf,01605,F,"21., Floridsdorf",Floridsdorf,"233,32","20. (42,83)"
+Großjedlersdorf I,01606,G I,"21., Floridsdorf",Floridsdorf,"373,55",–
+Großjedlersdorf II,01607,G II,"21., Floridsdorf",Floridsdorf,"222,29",–
+Jedlesee,01609,J,"21., Floridsdorf",Floridsdorf,"144,97",–
+Leopoldau,01613,L,"21., Floridsdorf",Floridsdorf,"1.047,46",–
+Schwarze Lackenau,01614,SL,"21., Floridsdorf",Floridsdorf,"402,65","19. (85,97), 20. (30,00)"
+Stammersdorf,01616,Sta,"21., Floridsdorf",Floridsdorf,"1.098,42",–
+Strebersdorf,01617,Str,"21., Floridsdorf",Floridsdorf,"463,12",–
+Aspern,01651,A,"22., Donaustadt",Donaustadt,"1.988,87","2. (24,00)"
+Breitenlee,01652,B,"22., Donaustadt",Donaustadt,"1.007,47",–
+Eßling,01654,E,"22., Donaustadt",Donaustadt,"1.497,78",–
+Hirschstetten,01658,H,"22., Donaustadt",Donaustadt,"551,89",–
+Kagran,01660,Ka,"22., Donaustadt",Donaustadt,"1.101,70","21. (5,17)"
+Kaiserebersdorf Herrschaft,01661,KH,"22., Donaustadt",Donaustadt,"2.332,12","2. (80,00)"
+Kaisermühlen,01669,Km,"22., Donaustadt",Donaustadt,"537,95","21. (20,45)"
+Landjägermeisteramt,01662,L,"22., Donaustadt",Donaustadt,"204,51","2. (31,00)"
+Stadlau,01665,St,"22., Donaustadt",Donaustadt,"499,44",–
+Süßenbrunn,01668,Sü,"22., Donaustadt",Donaustadt,"501,27",–
+Atzgersdorf,01801,A,"23., Liesing",Liesing,"376,42",–
+Erlaa,01802,E,"23., Liesing",Liesing,"238,96",–
+Inzersdorf,01803,I,"23., Liesing",Liesing,"854,06",–
+Kalksburg,01804,K,"23., Liesing",Liesing,"375,70",–
+Liesing,01805,L,"23., Liesing",Liesing,"273,82",–
+Mauer,01806,M,"23., Liesing",Liesing,"639,57",–
+Rodaun,01807,R,"23., Liesing",Liesing,"214,45",–
+Siebenhirten,01808,S,"23., Liesing",Liesing,"251,22",–
+
