@@ -1,6 +1,6 @@
 # R script 
 # File: global.R
-# Author: Christian Brandstätter 
+# Author: Christian BrandstÃ¤tter 
 # Contact: bran.chri@gmail.com
 # Date:  7.06.2021
 # Copyright (C) 2021
@@ -16,7 +16,7 @@ library(RColorBrewer)
 library(ggplot2)
 library(scales)
 library(readxl) 
-
+library(htmltools )
 palette <- colorRampPalette(colors=c("#deebf7", "#3182bd"))
 
 
@@ -33,45 +33,55 @@ dats <-  readRDS("./dats2.RDS")
 
 # Darstellung Kaufpreis
 dats$Kaufjahr <- as.integer(unlist(lapply(strsplit(as.character(dats$Erwerbsdatum), "\\."), "[", 3) ))
+dats <- dats %>% rename(Kaufpreis = Kaufpreis..) 
+dats2 <- dats %>%   filter(Kaufjahr > 1800 & Kaufjahr < 2100 & Kaufpreis > 50000 ) 
 
 
-
-kaufpreis <- dats %>%
+kaufpreis <- dats2 %>%
   group_by(Katastralgemeinde, Kaufjahr) %>%
   summarize( BEZNR = head(as.integer(BEZ), 1),
-            Kaufpreis = mean(Kaufpreis.., na.rm=TRUE)) %>%
-  filter(Kaufjahr > 1800 & Kaufjahr < 2100 & Kaufpreis > 50000 ) %>%
+            Kaufpreis = mean(Kaufpreis, na.rm=TRUE)) %>%
+#  filter(Kaufjahr > 1800 & Kaufjahr < 2100 & Kaufpreis > 50000 & zuordnung == "Ein-, Zweifamilienhaus") %>%
   na.omit() %>%
   arrange(desc(Kaufpreis)) 
 
-kaufpreis
-
 kaufpreis_legende <- kaufpreis %>%
   group_by(BEZNR) %>%
-  summarize(Kaufpreis = mean(Kaufpreis, na.rm=TRUE))
+  summarize(Kaufpreis = median(Kaufpreis, na.rm=TRUE))
 
-order(kaufpreis_legende$Kaufpreis, decreasing=TRUE)
-kaufpreis_legende$Kaufpreis
+# kaufpreis_legende %>% arrange(desc(Kaufpreis) )
 
-
-vergl <- match(order(kaufpreis_legende$Kaufpreis, decreasing=TRUE), shapeData@data$BEZNR ) 
-# levels(shapeData@data$NAMEK_RZ)
-
-legcols <- palette(nlevels(shapeData@data$NAMEK_RZ))[order(kaufpreis_legende$Kaufpreis, decreasing=TRUE)]
-#test <- cbind(legcols, order(kaufpreis_legende$Kaufpreis, decreasing=TRUE))
-#test
-
-# legcols <- c(1:23)[order(kaufpreis_legende$Kaufpreis, decreasing=TRUE)]
-# order(kaufpreis_legende$Kaufpreis, decreasing=TRUE)
-colmap <-  legcols[vergl]
+# mapping für boxplot 
+mapper = data.frame("namen" = unique(as.character(shapeData@data$NAMEK_RZ)), 
+                    nummer = unique(as.character(shapeData@data$BEZNR)))
+mapper$nummer <- as.integer(mapper$nummer )
+mapper <- mapper[order(mapper$nummer) , ]
 
 
-# palmap <-   data.frame(Bez = levels(shapeData@data$NAMEK_RZ),
- #                       color = legcols[vergl])
+legcols <- palette(nlevels(shapeData@data$NAMEK_RZ))[match(23:1, order(kaufpreis_legende$Kaufpreis, decreasing=TRUE))]
+vergl <- match( shapeData@data$BEZNR , order(kaufpreis_legende$Kaufpreis, decreasing=TRUE)) 
 
-# colmap <-  as.character(mapvalues(shapeData@data$NAMEK_RZ, palmap$Bez, as.character(palmap$color)))
+#vergla <- match(23:1, order(kaufpreis_legende$Kaufpreis, decreasing=TRUE))
+# verglb <- match( vergla, shapeData@data$BEZNR)
 
+colmap <-  legcols[order(kaufpreis_legende$Kaufpreis, decreasing=TRUE)]
 
+labels <- paste("<center><p>", shapeData@data$NAMEK_RZ,
+                            paste("</p><p> \u00D8 Kaufpreis -",
+                            format(round(kaufpreis_legende$Kaufpreis[shapeData@data$BEZNR],  0), big.mark=".",
+                                   decimal.mark = ","), " \u20ac </p</center>"))
+
+#  lapply(labels, htmltools::HTML) 
+
+## plot(NULL, xlim=c(0,length(legcols)), ylim=c(0,1), 
+##     xlab="", ylab="", xaxt="n", yaxt="n")
+## rect(0:(length(legcols)-1), 0, 1:length(legcols), 1, col=legcols)
+## text(1:length(legcols)-0.5, y = 0.5, order(kaufpreis_legende$Kaufpreis, decreasing=TRUE)) 
+
+## plot(NULL, xlim=c(0,length(colmap)), ylim=c(0,1), 
+##     xlab="", ylab="", xaxt="n", yaxt="n")
+## rect(0:(length(colmap)-1), 0, 1:length(colmap), 1, col=colmap)
+## text(1:length(colmap)-0.5, y = 0.5, shapeData@data$BEZNR) 
 
 # runApp()
 # library(rsconnect)

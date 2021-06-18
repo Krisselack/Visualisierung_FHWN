@@ -9,7 +9,7 @@
 ui <- bootstrapPage(theme = shinytheme("flatly"),
 
   tags$head(
-    HTML("<link rel='stylesheet' type='text/css' href='adjust.css'>"),
+    includeCSS("./adjust.css"), 
     HTML("<meta name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />")
   ), 
                 windowTitle="Visualisierungstechniken",
@@ -24,23 +24,22 @@ ui <- bootstrapPage(theme = shinytheme("flatly"),
                                                         label = "Bezirk",
                                                         choices =  levels(shapeData@data$NAMEK_RZ),
                                                         selected = "I. Innere Stadt"),
-                                          uiOutput("Bez")
+                                         uiOutput("Bez")
                                           )), 
-                          column(width=10, leafletOutput("mymap"), height= "150%", 
+                          column(width=6, leafletOutput("mymap"), height= "150%", 
                                 )
-                         )
-                )
+                         ), 
+                
+fluidRow(
+  selectInput("Kat", "Kategorie:",
+                choices = levels(dats2$zuordnung)),
+  ),
 
-## fluidRow(h2("Enteker Flächendaten"),
-##          h3("Zusammenfassung (kurz)"),
-##          column(3,
-##                 tableOutput("fldaten_ZF"),
-##                 downloadButton('download_ent',"csv-Download der Auswahl")
-##             #    downloadButton("saveplot", "png-Download der Abbildung")
-##                 ),
-##          column(12,
-##                 plotOutput("gemzahl_plot")
-##                 ),
-##          h3("Darstellung der ausgewählten Daten"),
-##          DT::dataTableOutput("fldaten")
+fluidRow(h2("Darstellung pro Katastrallgemeinde"),
+         h3("Kaufpreis pro Katastralgemeinde "),
+         column(12,
+                plotOutput("boxplot")
+                )
+         ))#         h3("Darstellung der ausgewählten Daten"),
+  #       DT::dataTableOutput("fldaten")
 
