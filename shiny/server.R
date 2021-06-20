@@ -122,7 +122,7 @@ server <- function(input, output, session) {
     #      geom_boxplot() 
     ggplot(data = data_to_plot(), aes(x =Katastralgemeinde, y = Kaufpreis / 1000)) +
       geom_boxplot(color = "darkblue", fill = "lightblue") +
-      labs(title="Boxplot Relativer Kaufpreis", y = "Kaufpreis  [1.000 \u20AC]",
+      labs(title="Boxplot Absoluter Kaufpreis", y = "Kaufpreis  [1.000 \u20AC]",
            x = "Katastralgmeinde") + theme_minimal(base_size=15)+
       scale_y_continuous(labels = function(x) format(x, big.mark = ".",decimal.mark=",",
                                                      scientific = FALSE))+

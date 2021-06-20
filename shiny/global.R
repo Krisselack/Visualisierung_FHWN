@@ -49,16 +49,10 @@ kaufpreis_legende <- kaufpreis %>%
   group_by(BEZNR) %>%
   summarize(Kaufpreis = median(Kaufpreis, na.rm=TRUE))
 
-# kaufpreis_legende %>% arrange(desc(Kaufpreis) )
-
 # mapping für boxplot 
 mapper = data.frame("namen" = unique(as.character(shapeData@data$NAMEK_RZ)), 
                     nummer = unique(as.character(shapeData@data$BEZNR)))
 mapper$nummer <- as.integer(as.character(mapper$nummer ))
-
-# mapper <- mapper[order(mapper$nummer) , ]
-
-legcols
 
 legcols <- palette(nlevels(shapeData@data$NAMEK_RZ))[match(23:1, order(kaufpreis_legende$Kaufpreis, decreasing=TRUE))]
 vergl <- match( shapeData@data$BEZNR , order(kaufpreis_legende$Kaufpreis, decreasing=TRUE)) 
