@@ -37,8 +37,20 @@ saveRDS(subs_union, "./shiny/shape_corr.RDS")
 kgs <- read.csv("./data/Wikipedia_KG.csv")
 kgs_merge <- data.frame("KG.Code" = kgs$KG.Nr., "BEZ" = substr(kgs$Bezirk, 1, 2), stringsAsFactors = FALSE)
 
+str(preise)
+str(kgs_merge)
+
+
 preise_mit_Bezirk <- merge(preise, kgs_merge,  by = "KG.Code", how="left")
 table(preise_mit_Bezirk$BEZ)
+
+colnames(preise_mit_Bezirk)
+
+
+preise_mit_Bezirk %>%
+  group_by(BEZ) %>%
+  summarize(paste(unique(Katastralgemeinde))) %>%
+  head(20)
 
 saveRDS(preise_mit_Bezirk, "./shiny/dats2.RDS")
 

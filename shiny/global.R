@@ -5,9 +5,9 @@
 # Date:  7.06.2021
 # Copyright (C) 2021
 # Description: 
-
 library(shiny)
-library(shinythemes)
+# library(shinythemes)
+library(shinydashboard)
 library(leaflet)
 library(plyr)
 library(dplyr)
@@ -33,7 +33,7 @@ dats <-  readRDS("./dats2.RDS")
 
 # Darstellung Kaufpreis
 dats$Kaufjahr <- as.integer(unlist(lapply(strsplit(as.character(dats$Erwerbsdatum), "\\."), "[", 3) ))
-dats <- dats %>% rename(Kaufpreis = Kaufpreis..) 
+dats <- dats %>% rename(Kaufpreis = 'Kaufpreis..', Kaufpreis_rel = 'X..m..Gfl.')
 dats2 <- dats %>%   filter(Kaufjahr > 1800 & Kaufjahr < 2100 & Kaufpreis > 50000 ) 
 
 
@@ -54,8 +54,9 @@ kaufpreis_legende <- kaufpreis %>%
 # mapping für boxplot 
 mapper = data.frame("namen" = unique(as.character(shapeData@data$NAMEK_RZ)), 
                     nummer = unique(as.character(shapeData@data$BEZNR)))
-mapper$nummer <- as.integer(mapper$nummer )
-mapper <- mapper[order(mapper$nummer) , ]
+mapper$nummer <- as.integer(as.character(mapper$nummer ))
+
+# mapper <- mapper[order(mapper$nummer) , ]
 
 
 legcols <- palette(nlevels(shapeData@data$NAMEK_RZ))[match(23:1, order(kaufpreis_legende$Kaufpreis, decreasing=TRUE))]
