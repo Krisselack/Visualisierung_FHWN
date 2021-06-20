@@ -34,14 +34,14 @@ dats <-  readRDS("./dats2.RDS")
 # Darstellung Kaufpreis
 dats$Kaufjahr <- as.integer(unlist(lapply(strsplit(as.character(dats$Erwerbsdatum), "\\."), "[", 3) ))
 dats <- dats %>% rename(Kaufpreis = 'Kaufpreis..', Kaufpreis_rel = 'X..m..Gfl.')
-dats2 <- dats %>%   filter(Kaufjahr > 1800 & Kaufjahr < 2100 & Kaufpreis > 50000 ) 
+dats2 <- dats %>%   filter(Kaufjahr > 1800 & Kaufjahr < 2050 & Kaufpreis > 50000 ) 
 
 
 kaufpreis <- dats2 %>%
   group_by(Katastralgemeinde, Kaufjahr) %>%
   summarize( BEZNR = head(as.integer(BEZ), 1),
             Kaufpreis = mean(Kaufpreis, na.rm=TRUE)) %>%
-#  filter(Kaufjahr > 1800 & Kaufjahr < 2100 & Kaufpreis > 50000 & zuordnung == "Ein-, Zweifamilienhaus") %>%
+  #  filter(Kaufjahr > 1800 & Kaufjahr < 2100 & Kaufpreis > 50000 & zuordnung == "Ein-, Zweifamilienhaus") %>%
   na.omit() %>%
   arrange(desc(Kaufpreis)) 
 
@@ -58,6 +58,7 @@ mapper$nummer <- as.integer(as.character(mapper$nummer ))
 
 # mapper <- mapper[order(mapper$nummer) , ]
 
+legcols
 
 legcols <- palette(nlevels(shapeData@data$NAMEK_RZ))[match(23:1, order(kaufpreis_legende$Kaufpreis, decreasing=TRUE))]
 vergl <- match( shapeData@data$BEZNR , order(kaufpreis_legende$Kaufpreis, decreasing=TRUE)) 
@@ -68,9 +69,9 @@ vergl <- match( shapeData@data$BEZNR , order(kaufpreis_legende$Kaufpreis, decrea
 colmap <-  legcols[order(kaufpreis_legende$Kaufpreis, decreasing=TRUE)]
 
 labels <- paste("<center><p>", shapeData@data$NAMEK_RZ,
-                            paste("</p><p> \u00D8 Kaufpreis -",
-                            format(round(kaufpreis_legende$Kaufpreis[shapeData@data$BEZNR],  0), big.mark=".",
-                                   decimal.mark = ","), " \u20ac </p</center>"))
+                paste("</p><p> \u00D8 Kaufpreis -",
+                      format(round(kaufpreis_legende$Kaufpreis[shapeData@data$BEZNR],  0), big.mark=".",
+                             decimal.mark = ","), " \u20ac </p</center>"))
 
 #  lapply(labels, htmltools::HTML) 
 

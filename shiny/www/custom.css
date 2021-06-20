@@ -8,7 +8,7 @@
 .shiny-options-group { 
   height: auto;
   width: auto;
-  font-size:11px; 
+  font-size:16px; 
   -webkit-column-count: 2; /* Chrome, Safari, Opera */ 
   -moz-column-count: 2;    /* Firefox */ 
   column-count: 2; 
@@ -17,3 +17,15 @@
   column-fill: balance;
  /* margin-top: 0px; */
 } 
+
+.irs-grid-text {font-size: 12pt !important;
+                transform: rotate(-90deg) translate(-10px);
+               }
+
+.skin-blue .main-sidebar {
+    background-color: #3182bd; 
+                                }
+.irs-grid-pol.small {height: 0px;}
+
+h3 {  margin-left: 1em; margin-top: 0.5em}
+a{font-size: 16pt; margin-left:1em}
