@@ -1,6 +1,6 @@
 # R script 
 # File: server.R
-# Author: Christian Brandstätter 
+# Author: Christian BrandstÃ¤tter 
 # Contact: bran.chri@gmail.com
 # Date:  7.06.2021
 # Copyright (C) 2021
@@ -12,7 +12,7 @@ server <- function(input, output, session) {
     
     leaflet() %>%
       addProviderTiles("BasemapAT.grau") %>%
-      setView(lat=48.21, lng=16.40,, zoom=11) %>%
+      setView(lat=48.21, lng=16.40,, zoom=10) %>%
 
   addPolygons(data=shapeData, weight=2, # fill="transparent",
               layerId = ~NAMEK_RZ, 
@@ -101,7 +101,7 @@ server <- function(input, output, session) {
     return(data4)
   })
 
-  # für Anzahl Kategorien 
+  # fÃ¼r Anzahl Kategorien 
   data_to_plot2 <- reactive({
     data <- dats2
     zahl <- mapvalues(input$Bez, mapper$namen, mapper$nummer, warn_missing=FALSE)
@@ -123,7 +123,7 @@ server <- function(input, output, session) {
     ggplot(data = data_to_plot(), aes(x =Katastralgemeinde, y = Kaufpreis / 1000)) +
       geom_boxplot(color = "darkblue", fill = "lightblue") +
       labs(title="Boxplot Absoluter Kaufpreis", y = "Kaufpreis  [1.000 \u20AC]",
-           x = "Katastralgmeinde") + theme_minimal(base_size=15)+
+           x = "Katastralgmeinde") + theme_minimal(base_size=13)+
       scale_y_continuous(labels = function(x) format(x, big.mark = ".",decimal.mark=",",
                                                      scientific = FALSE))+
       theme(axis.text.x = element_text(angle = 90, hjust = 1))
@@ -141,7 +141,7 @@ server <- function(input, output, session) {
       scale_y_continuous(labels = function(x) format(x, big.mark = ".",decimal.mark=",",
                                                      scientific = FALSE))+
       labs(title="Boxplot Relativer Kaufpreis", y = "Kaufpreis / Grundstücksfläche [\u20AC / m2]",
-           x = "Katastralgmeinde") + theme_minimal(base_size=15)+
+           x = "Katastralgmeinde") + theme_minimal(base_size=13)+
       theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
     
@@ -163,7 +163,7 @@ server <- function(input, output, session) {
       scale_y_continuous(labels = function(x) format(x, big.mark = ".",decimal.mark=",",
                                                      scientific = FALSE))+
       labs(title="Kategorie (alle Jahre)", y = "MW Grundstücksfläche [m2]",
-           x = "Katastralgmeinde", caption= "+/- Standardfehler") + theme_minimal(base_size=15)+
+           x = "Katastralgmeinde", caption= "+/- Standardfehler") + theme_minimal(base_size=13)+
       theme(axis.text.x = element_text(angle = 90, hjust = 1))
     
     
@@ -176,7 +176,7 @@ server <- function(input, output, session) {
       geom_label(stat='count', aes(label=..count..))+
       scale_y_continuous(labels = function(x) format(x, big.mark = ".",decimal.mark=",",
                                                      scientific = FALSE))+
-      labs(title="Kategorie (alle Jahre)", y = "Anzahl", x = "Kategorie (Zuordnung)") + theme_minimal(base_size=15)+
+      labs(title="Kategorie (alle Jahre)", y = "Anzahl", x = "Kategorie (Zuordnung)") + theme_minimal(base_size=13)+
       theme(axis.text.x = element_text(angle = 90, hjust = 1))
     
   })

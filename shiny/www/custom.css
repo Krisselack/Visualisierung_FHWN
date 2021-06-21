@@ -29,3 +29,7 @@
 
 h3 {  margin-left: 1em; margin-top: 0.5em}
 a{font-size: 16pt; margin-left:1em}
+
+.box { margin-bottom: 0;
+        margin-top: 0;
+     } 
