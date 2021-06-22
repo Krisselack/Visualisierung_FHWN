@@ -6,7 +6,7 @@
 # Copyright (C) 2021
 # Description: 
 
-ui <- dashboardPage(skin = "blue", #shinytheme("simplex"),
+ui <- dashboardPage(skin = "blue", 
                     
                     dashboardHeader(title = "Datensatz Stadt Wien - Preisentwicklung "
                                     ),
@@ -16,8 +16,7 @@ ui <- dashboardPage(skin = "blue", #shinytheme("simplex"),
                     
                     dashboardSidebar(width = 450,
                                      h3("In diesem Bereich  kann man Daten filtern."),
-                                     # h3(": "), 
-                                     h3("Und zwar: den Bezirk, die Kategorie, \n und den Zeitrahmen der Transaktionen."), 
+                                       h3("Und zwar: den Bezirk, die Kategorie, \n und den Zeitrahmen der Transaktionen."), 
 
                                      wellPanel( radioButtons("Bez", 
                                                              label = "Bezirk",
@@ -43,47 +42,40 @@ ui <- dashboardPage(skin = "blue", #shinytheme("simplex"),
                                                tags$a(href="https://www.data.gv.at/katalog/dataset/kaufpreissammlung-liegenschaften-wien",
                                                       "Datensatz")
                                                )
-                                     #   uiOutput("Bez")      
 
                                      ), 
                     
                     dashboardBody(
                       fluidRow(
-                      tags$head(
-                        tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")
-                      ), 
-                      column(width = 5,
-                             
-                        fluidRow(       
-                        box(width=12,  leafletOutput("mymap", height = 475), height= 500), 
+                        tags$head(
+                          tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")
+                        ), 
+                        column(width = 5,
+                               
+                               fluidRow(       
+                                 box(width=12,  leafletOutput("mymap", height = 475), height= 500), 
 
-                        ## fluidRow(h2("Darstellung pro Katastrallgemeinde"),
-                        ##          h3("Kaufpreis pro Katastralgemeinde "),
-                        ##          column(12,
-                        ##                 plotOutput("boxplot")
-                        ##                 )
-
-                        box(width = 12,  title = "Grundstüksfläche - Darstellung pro Katastralgemeinde", height = 475, plotOutput("colplot")))), 
-                      
+                                 box(width = 12,  title = "Grundstücksfläche - Darstellung pro Katastralgemeinde",
+                                     height = 475, plotOutput("colplot")))), 
+                        
                         column(width = 5, 
-                         tabBox(width=12, height = 480, #selected= "Kaufpreis_absolut",
-                                title = "Darstellung pro Katastralgemeinde",
-                                tabPanel("Kaufpreis_absolut", plotOutput("boxplot")),
-                                tabPanel("Kaufpreis_relativ", plotOutput("boxplot2"))
-                                ),
+                               tabBox(width=12, height = 500, #selected= "Kaufpreis_absolut",
+                                      title = "Darstellung pro Katastralgemeinde",
+                                      tabPanel("Kaufpreis_absolut", plotOutput("boxplot")),
+                                      tabPanel("Kaufpreis_relativ", plotOutput("boxplot2"))
+                                      ),
 
-                         box(width=12,  title = "Anzahl pro Kategorie (per Bezirk)", height = 475, plotOutput("barplot"))),
-                      
-                      column(width=2,
-                             box(width=12, 
-                         h4("In der ersten Abbildungszeile wird LINKS eine  Wien-Karte nach Bezirk dargestellt. Die Click-Auswahl ist mit der linken Button-Auswahl verknüpt. Im  RECHTEN Fenster werden Box-Plots dargestellt, die den absoluten und relativen Kaufwert pro Katastralgemeinde auf Bezirksebene (in Tabs) darstellen."),
-                         br(), br(), br(),  br(),  br(), br(), 
- h4("In der zweiten Reihe wird LINKS die Fläche  pro Katastralgmeinde angegeben, um den relativen Preis visuell besser nachvollziehen zu könen. Auf der RECHTEN Seite befindet sich  die Zählstatistik der einzelnen Kategorien pro Bezirk, um die Auswahl links zu erleichtern.")
-))
+                               box(width=12,  title = "Anzahl pro Kategorie (auf Bezirksebene)",
+                                   height = 475, plotOutput("barplot"))),
+                        
+                        column(width=2,
+                               box(width=12,
+                                   h2("oben"), 
+                                   h4("In der ersten Abbildungszeile wird LINKS eine  Wien-Karte nach Bezirk dargestellt. Die Click-Auswahl ist mit der linken Button-Auswahl verknüpt. Im  RECHTEN Fenster werden Box-Plots dargestellt, die den absoluten und relativen Kaufwert pro Katastralgemeinde auf Bezirksebene (in Tabs) darstellen."),
+                                   br(), br(), br(),  br(),  br(), br(), br(), br(), br(), # br(), 
+                                   h2("unten"), 
+                                   h4("In der zweiten Reihe wird LINKS die Fläche  pro Katastralgmeinde angegeben, um den relativen Preis visuell besser nachvollziehen zu könen. Auf der RECHTEN Seite befindet sich  die Zählstatistik der einzelnen Kategorien pro Bezirk, um die Auswahl links zu erleichtern.")
+                                   ))
                         
                       ))
                     )             
-
-#         h3("Darstellung der ausgewälten Daten"),
-#       DT::dataTableOutput("fldaten")
-

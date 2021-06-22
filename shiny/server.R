@@ -1,6 +1,6 @@
 # R script 
 # File: server.R
-# Author: Christian BrandstÃ¤tter 
+# Author: Christian Brandstätter 
 # Contact: bran.chri@gmail.com
 # Date:  7.06.2021
 # Copyright (C) 2021
@@ -10,9 +10,9 @@ server <- function(input, output, session) {
   
   output$mymap <- renderLeaflet({
     
-    leaflet() %>%
+    leaflet(options = leafletOptions(zoomSnap = 0.25, zoomDelta=0.25)) %>%
       addProviderTiles("BasemapAT.grau") %>%
-      setView(lat=48.21, lng=16.40,, zoom=10) %>%
+      setView(lat=48.22, lng=16.38, zoom=11) %>%
 
   addPolygons(data=shapeData, weight=2, # fill="transparent",
               layerId = ~NAMEK_RZ, 
@@ -122,11 +122,12 @@ server <- function(input, output, session) {
     #      geom_boxplot() 
     ggplot(data = data_to_plot(), aes(x =Katastralgemeinde, y = Kaufpreis / 1000)) +
       geom_boxplot(color = "darkblue", fill = "lightblue") +
-      labs(title="Boxplot Absoluter Kaufpreis", y = "Kaufpreis  [1.000 \u20AC]",
+      labs(#title="Boxplot Absoluter Kaufpreis",
+           y = "Kaufpreis  [1.000 \u20AC]",
            x = "Katastralgmeinde") + theme_minimal(base_size=13)+
       scale_y_continuous(labels = function(x) format(x, big.mark = ".",decimal.mark=",",
                                                      scientific = FALSE))+
-      theme(axis.text.x = element_text(angle = 90, hjust = 1))
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
   })
 
@@ -140,9 +141,10 @@ server <- function(input, output, session) {
       geom_boxplot(color = "darkblue", fill = "lightblue") +
       scale_y_continuous(labels = function(x) format(x, big.mark = ".",decimal.mark=",",
                                                      scientific = FALSE))+
-      labs(title="Boxplot Relativer Kaufpreis", y = "Kaufpreis / Grundstücksfläche [\u20AC / m2]",
+      labs(#title="Boxplot Relativer Kaufpreis",
+           y = "Kaufpreis / Grundstücksfläche [\u20AC / m2]",
            x = "Katastralgmeinde") + theme_minimal(base_size=13)+
-      theme(axis.text.x = element_text(angle = 90, hjust = 1))
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
     
   })
@@ -176,7 +178,8 @@ server <- function(input, output, session) {
       geom_label(stat='count', aes(label=..count..))+
       scale_y_continuous(labels = function(x) format(x, big.mark = ".",decimal.mark=",",
                                                      scientific = FALSE))+
-      labs(title="Kategorie (alle Jahre)", y = "Anzahl", x = "Kategorie (Zuordnung)") + theme_minimal(base_size=13)+
+      labs(title="Kategorie", y = "Anzahl", x = "Kategorie (Zuordnung)",
+           caption = "Filterung nur nach Bezirk möglich, da als Überblick gedacht (nicht nach Kategorie und Jahr). ") + theme_minimal(base_size=13)+
       theme(axis.text.x = element_text(angle = 90, hjust = 1))
     
   })

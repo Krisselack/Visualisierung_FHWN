@@ -1,12 +1,11 @@
 # R script 
 # File: global.R
-# Author: Christian BrandstÃ¤tter 
+# Author: Christian Brandstätter 
 # Contact: bran.chri@gmail.com
 # Date:  7.06.2021
 # Copyright (C) 2021
-# Description: 
+
 library(shiny)
-# library(shinythemes)
 library(shinydashboard)
 library(leaflet)
 library(plyr)
@@ -41,7 +40,6 @@ kaufpreis <- dats2 %>%
   group_by(Katastralgemeinde, Kaufjahr) %>%
   summarize( BEZNR = head(as.integer(BEZ), 1),
             Kaufpreis = mean(Kaufpreis, na.rm=TRUE)) %>%
-  #  filter(Kaufjahr > 1800 & Kaufjahr < 2100 & Kaufpreis > 50000 & zuordnung == "Ein-, Zweifamilienhaus") %>%
   na.omit() %>%
   arrange(desc(Kaufpreis)) 
 
