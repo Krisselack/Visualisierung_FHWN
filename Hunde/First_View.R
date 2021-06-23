@@ -6,10 +6,13 @@
 # Copyright (C) 2021
 # Description: 
 library(dplyr) 
+library(writexl)
 
 hundat <- read.csv2("./hunde-wien.csv", skip = 1, stringsAsFactors=FALSE, fileEncoding = "Windows-1252")
-metadat <- read.csv("./Meta_Wien.csv", stringsAsFactors=FALSE)
+
+metadat <- read.csv("./Meta_Wien.csv", stringsAsFactors=FALSE, , fileEncoding = "UTF-8")
 hundat$Anzahl <- as.integer(hundat$Anzahl)
+
 
 # Kamphunde 
 # https://www.wien.gv.at/gesellschaft/tiere/hundefuehrschein/verpflichtend.html
@@ -58,3 +61,33 @@ text(x = 1:23, pull(kampfhunde[,2]), labels = 1:23)
 plot(x = 1:23, pull(kampfhunde[, 3]), ylab = "Kampfhund / km2")
 text(x = 1:23, pull(kampfhunde[,3]), labels = 1:23)
 
+head(hundat2)
+
+# Aufbereitung 
+hundat3 <- hundat2 %>%
+  select(-NUTS1, -NUTS2, -NUTS3, - SUB_DISTRICT_CODE, - Nr) %>%
+  rename("Bezirkscode" = DISTRICT_CODE, "PLZ" = Postal_CODE , "Rasse" = `Dog.Breed`,
+         "Anz_Kampfhund" = Kampfhund,  "Bezirksname" = Gemeinde.bezirk,
+         "Fläche_m2" =  Flaeche, "Beschäftigte" =  `Beschäf.tigte_2016`) %>%
+  mutate("Georef_PBI" = paste("Ausria", PLZ)) 
+
+writexl::write_xlsx(hundat3, "./Hundedaten.xlsx")
+
+head(hundat3)
+
+summaryset <- hundat3 %>% group_by(Georef_PBI) %>%
+  summarize("Hunde_Bezirk" = sum(Anzahl),
+            "Kampfhunde_Bezirk" = sum(Anz_Kampfhund),
+            "Bez_Name" = head(Bezirksname, 1),
+            "Bez_Fläche" = head(Fläche_m2, 1),
+            "Bez_Besch" = head(Beschäftigte, 1),
+            "Bez_EINW" = head(Einw_2021, 1),
+            "Bez_BEV_DICHTE" = head(Einw_km2, 1)
+            ) %>%
+  mutate(Hunde_pro_m2 =  Hunde_Bezirk / Bez_Fläche,
+         Kampfhunde_pro_m2 = Kampfhunde_Bezirk / Bez_Fläche,
+         Hund_pro_EW = Hunde_Bezirk / Bez_EINW,
+         Kampfhund_pro_EW = Kampfhunde_Bezirk / Bez_EINW
+         )
+
+writexl::write_xlsx(summaryset, "./Hundedaten_Gruppe.xlsx")
