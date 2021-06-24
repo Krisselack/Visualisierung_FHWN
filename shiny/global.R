@@ -45,20 +45,24 @@ kaufpreis <- dats2 %>%
 
 kaufpreis_legende <- kaufpreis %>%
   group_by(BEZNR) %>%
-  summarize(Kaufpreis = median(Kaufpreis, na.rm=TRUE))
+  summarize(Kaufpreis = mean(Kaufpreis, na.rm=TRUE)) %>%
+  arrange(desc(Kaufpreis))
 
+kaufpreis_legende$farbe <- rev(palette(nlevels(shapeData@data$NAMEK_RZ)))
+  
 # mapping für boxplot 
 mapper = data.frame("namen" = unique(as.character(shapeData@data$NAMEK_RZ)), 
                     nummer = unique(as.character(shapeData@data$BEZNR)))
 mapper$nummer <- as.integer(as.character(mapper$nummer ))
 
-legcols <- palette(nlevels(shapeData@data$NAMEK_RZ))[match(23:1, order(kaufpreis_legende$Kaufpreis, decreasing=TRUE))]
-vergl <- match( shapeData@data$BEZNR , order(kaufpreis_legende$Kaufpreis, decreasing=TRUE)) 
+legcols <- mapvalues(shapeData@data$BEZNR, kaufpreis_legende$BEZNR, kaufpreis_legende$farbe)
 
-#vergla <- match(23:1, order(kaufpreis_legende$Kaufpreis, decreasing=TRUE))
-# verglb <- match( vergla, shapeData@data$BEZNR)
+shapeData@data$farbs <- legcols
 
-colmap <-  legcols[order(kaufpreis_legende$Kaufpreis, decreasing=TRUE)]
+#legcols <-  kaufpreis_legende$farbe[match(kaufpreis_legende$BEZNR, shapeData@data$BEZNR)]
+# colmap <-  rev(legcols) 
+
+# shapeData@data$NAMEK_RZ <- as.character(shapeData@data$NAMEK_RZ)
 
 labels <- paste("<center><p>", shapeData@data$NAMEK_RZ,
                 paste("</p><p> \u00D8 Kaufpreis -",
@@ -70,7 +74,7 @@ labels <- paste("<center><p>", shapeData@data$NAMEK_RZ,
 ## plot(NULL, xlim=c(0,length(legcols)), ylim=c(0,1), 
 ##     xlab="", ylab="", xaxt="n", yaxt="n")
 ## rect(0:(length(legcols)-1), 0, 1:length(legcols), 1, col=legcols)
-## text(1:length(legcols)-0.5, y = 0.5, order(kaufpreis_legende$Kaufpreis, decreasing=TRUE)) 
+##  text(1:length(legcols)-0.5, y = 0.5, order(kaufpreis_legende$Kaufpreis, decreasing=TRUE)) 
 
 ## plot(NULL, xlim=c(0,length(colmap)), ylim=c(0,1), 
 ##     xlab="", ylab="", xaxt="n", yaxt="n")

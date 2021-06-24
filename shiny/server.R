@@ -16,7 +16,7 @@ server <- function(input, output, session) {
 
   addPolygons(data=shapeData, weight=2, # fill="transparent",
               layerId = ~NAMEK_RZ, 
-              color=colmap,
+              color=shapeData@data$farbs,
               fillOpacity = 0.9,
               highlight = highlightOptions(
                 weight = 3,

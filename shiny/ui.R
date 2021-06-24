@@ -15,6 +15,7 @@ ui <- dashboardPage(skin = "blue",
                     
                     
                     dashboardSidebar(width = 450,
+                                     h2("Optimiert für 1920x1080  und 80% im Browser"), 
                                      h3("In diesem Bereich  kann man Daten filtern."),
                                        h3("Und zwar: den Bezirk, die Kategorie, \n und den Zeitrahmen der Transaktionen."), 
 
