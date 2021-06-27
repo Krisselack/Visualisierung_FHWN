@@ -1,10 +1,12 @@
 # R script 
 # File: First_View.R
-# Author: Christian Brandst√§tter 
+# Author: Christian Brandst‰tter 
 # Contact: bran.chri@gmail.com
 # Date: 23.06.2021
 # Copyright (C) 2021
-# Description: 
+# Description:
+# Hier wird das Hunde-Datenset aufbereitet; Z‰hlung von Kampfhunden und Aggregation nach Bezirk
+
 library(dplyr) 
 library(writexl)
 
@@ -12,7 +14,6 @@ hundat <- read.csv2("./hunde-wien.csv", skip = 1, stringsAsFactors=FALSE, fileEn
 
 metadat <- read.csv("./Meta_Wien.csv", stringsAsFactors=FALSE, , fileEncoding = "UTF-8")
 hundat$Anzahl <- as.integer(hundat$Anzahl)
-
 
 # Kamphunde 
 # https://www.wien.gv.at/gesellschaft/tiere/hundefuehrschein/verpflichtend.html
@@ -29,10 +30,6 @@ kampfs <- c("Bullterrier",
   "Dogo Argentino")
 
 
-kampfs %in% hundat$Dog.Breed 
-
-sort(unique(hundat$Dog.Breed) )
-
 kampfres <- NULL 
 for(i in kampfs){
   print(i)
@@ -47,7 +44,6 @@ hundat$Kampfhund <- ifelse(
 hundat2 <- hundat %>%
   left_join(metadat, by = c("DISTRICT_CODE" =  "Code"))
 
-head(hundat2)
 
 kampfhunde <- hundat2 %>%
   group_by(DISTRICT_CODE) %>%
@@ -61,23 +57,21 @@ text(x = 1:23, pull(kampfhunde[,2]), labels = 1:23)
 plot(x = 1:23, pull(kampfhunde[, 3]), ylab = "Kampfhund / km2")
 text(x = 1:23, pull(kampfhunde[,3]), labels = 1:23)
 
-head(hundat2)
-
 # Aufbereitung 
 hundat3 <- hundat2 %>%
   select(-NUTS1, -NUTS2, -NUTS3, - SUB_DISTRICT_CODE, - Nr) %>%
   rename("Bezirkscode" = DISTRICT_CODE, "PLZ" = Postal_CODE , "Rasse" = `Dog.Breed`,
          "Anz_Kampfhund" = Kampfhund,  "Bezirksname" = Gemeinde.bezirk,
          "Fl‰che_m2" =  Flaeche, "Besch‰ftigte" =  `Besch‰f.tigte_2016`) %>%
-  mutate("Georef_PBI" = paste("Ausria", PLZ)) 
+  mutate("Georef_PBI" = paste("Austria", PLZ), "Unbekannt"  = ifelse(Rasse=="Unbekannt", 1, 0 )) 
 
 writexl::write_xlsx(hundat3, "./Hundedaten.xlsx")
 
-head(hundat3)
 
 summaryset <- hundat3 %>% group_by(Georef_PBI) %>%
   summarize("Hunde_Bezirk" = sum(Anzahl),
             "Kampfhunde_Bezirk" = sum(Anz_Kampfhund),
+            "Bez_PLZ" = head(PLZ, 1),
             "Bez_Name" = head(Bezirksname, 1),
             "Bez_Fl‰che" = head(Fl‰che_m2, 1),
             "Bez_Besch" = head(Besch‰ftigte, 1),
@@ -90,4 +84,23 @@ summaryset <- hundat3 %>% group_by(Georef_PBI) %>%
          Kampfhund_pro_EW = Kampfhunde_Bezirk / Bez_EINW
          )
 
+
+# unbekannte rassen 
+summe_unb <- hundat3 %>%
+  group_by(PLZ) %>%
+  filter(Unbekannt==1) %>%
+  summarize(Unbekannt = sum(Anzahl))
+
+# bekannte rassen 
+summe_b <- hundat3 %>%
+  group_by(PLZ) %>%
+  filter(Unbekannt==0) %>%
+  summarize(Bekannt = sum(Anzahl))
+
+
+summaryset <- summaryset %>% left_join(summe_unb, by =c("Bez_PLZ"="PLZ") ) %>% left_join(summe_b, by =c("Bez_PLZ"="PLZ") )
+
 writexl::write_xlsx(summaryset, "./Hundedaten_Gruppe.xlsx")
+
+
+

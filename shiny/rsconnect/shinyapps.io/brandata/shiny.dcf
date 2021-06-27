@@ -1,0 +1,11 @@
+name: shiny
+title:
+username:
+account: brandata
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 4240593
+bundleId: 4752023
+url: https://brandata.shinyapps.io/shiny/
+when: 1624547272.14921
+lastSyncTime: 1624547272.14921
