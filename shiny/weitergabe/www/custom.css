@@ -1,0 +1,46 @@
+    html, body, #mymap {
+        height: 100%;
+        width: 100%;
+        margin-left: 100 px; 
+    }
+    
+.shiny-options-group { 
+  height: auto;
+  width: auto;
+  font-size:20px; 
+  -webkit-column-count: 2; /* Chrome, Safari, Opera */ 
+  -moz-column-count: 2;    /* Firefox */ 
+  column-count: 2; 
+  -webkit-column-fill: balance;
+  -moz-column-fill: balance;
+  column-fill: balance;
+  -moz-transform: scale(0.8, 0.8); /* Moz-browsers */
+   zoom: 0.8; /* Other non-webkit browsers */
+   zoom: 80%; /* Webkit browsers */
+
+ /* margin-top: 0px; */
+} 
+
+.irs-grid-text {font-size: 12pt !important;
+                transform: rotate(-90deg) translate(-10px);
+               }
+
+.skin-blue .main-sidebar {
+    background-color: #3182bd; 
+                                }
+.irs-grid-pol.small {height: 0px;}
+
+h3 {  margin-left: 1em; 
+                        margin-top: 0.5em
+   }
+
+a{font-size: 16pt; margin-left:1em}
+
+.box { margin-bottom: 10pt;
+        margin-top: 0;
+     }
+
+
+.nav-tabs-custom { margin-bottom: 10pt;
+        margin-top: 0;
+     } 
